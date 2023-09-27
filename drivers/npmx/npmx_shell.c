@@ -12,6 +12,7 @@
 #include <zephyr/kernel.h>
 #include <zephyr/shell/shell.h>
 #include <math.h>
+#include <zephyr/sys/reboot.h>
 
 /** @brief The difference in centigrade scale between 0*C to absolute zero temperature. */
 #define ABSOLUTE_ZERO_DIFFERENCE 273.15f
@@ -4121,6 +4122,7 @@ static int ship_mode_set(const struct shell *shell, npmx_ship_task_t ship_task)
 
 	if (check_error_code(shell, err_code)) {
 		shell_print(shell, "Success: 1.");
+		sys_reboot(SYS_REBOOT_COLD);
 	} else {
 		shell_error(shell, "Error: unable to set mode.");
 	}
